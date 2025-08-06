@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalPro - Marketing Digital de Alto Impacto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 50%, #f9fafb 100%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(99, 102, 241, 0.1)"/></svg>');
+            opacity: 0.3;
+            animation: moveBackground 20s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 1000px 1000px;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            opacity: 0;
+        }
+        
+        .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: var(--primary);
+            padding: 12px 24px;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            opacity: 0;
+            z-index: 1;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+            border-radius: 20px;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        .service-price {
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 1;
+        }
+        
+        .process-step {
+            text-align: center;
+            width: 22%;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .process-step p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        /* Results Section */
+        .results {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .result-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .result-label {
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .testimonials-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .testimonials-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial {
+            min-width: 100%;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 5px solid var(--primary);
+            object-fit: cover;
+        }
+        
+        .testimonial h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .testimonial .position {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .testimonial blockquote {
+            font-style: italic;
+            color: var(--dark);
+            line-height: 1.8;
+            position: relative;
+            padding: 0 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial blockquote::before,
+        .testimonial blockquote::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial blockquote::before {
+            top: -20px;
+            left: 0;
+        }
+        
+        .testimonial blockquote::after {
+            bottom: -40px;
+            right: 0;
+        }
+        
+        .testimonial-stars {
+            color: #fbbf24;
+            margin: 15px 0;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-white {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .cta-white:hover {
+            background: #f8fafc;
+            color: var(--primary-dark);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid #eee;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--primary);
+            position: relative;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            color: var(--gray);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li strong {
+            color: var(--dark);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .contact-info p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-form {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            background: var(--gradient);
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        /* Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero {
+                height: 90vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-image {
+                right: -50px;
+                width: 45%;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+            
+            .process-step {
+                width: 100%;
+                text-align: left;
+            }
+            
+            .process-step::before {
+                content: '→';
+                margin-right: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin: 15px 0;
+                gap: 20px;
+            }
+            
+            .hero {
+                height: 80vh;
+                text-align: center;
+            }
+            
+            .hero-content {
+                margin: 0 auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 80%;
+                margin: 40px auto 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Digital<span>Pro</span></a>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#proceso">Proceso</a></li>
+                        <li><a href="#resultados">Resultados</a></li>
+                        <li><a href="#planes">Planes</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+                <a href="#contacto" class="cta-button">Solicitar Consulta</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Impulsa tu negocio con <span class="highlight">marketing digital de alto impacto</span></h1>
+                <p>Estrategias personalizadas que aumentan tu visibilidad, generan leads calificados y convierten visitantes en clientes fieles. Más tráfico, más ventas, más crecimiento.</p>
+                <div class="hero-buttons">
+                    <a href="#servicios" class="cta-button">Ver Servicios</a>
+                    <a href="#contacto" class="secondary-button">Agendar Consulta</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://placehold.co/600x400/6366f1/ffffff?text=Marketing+Digital" alt="Marketing Digital">
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios de Marketing Digital</h2>
+            <p class="section-subtitle">Soluciones integrales diseñadas para maximizar tu presencia online y acelerar el crecimiento de tu negocio</p>
+            <div class="services-grid" id="servicesGrid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Publicidad en Redes Sociales</h3>
+                    <p>Campañas estratégicas en Facebook, Instagram, LinkedIn y TikTok que alcanzan a tu audiencia ideal con mensajes persuasivos y creativos impactantes.</p>
+                    <div class="service-price">Desde $899/mes</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>SEO & Posicionamiento Web</h3>
+                    <p>Optimización técnica y de contenido para que tu sitio aparezca en los primeros resultados de Google, generando tráfico orgánico de alta calidad.</p>
+                    <div class="service-price">Desde $799/mes</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📢</div>
+                    <h3>Google Ads & PPC</h3>
+                    <p>Campañas de pago por clic altamente segmentadas que generan leads calificados y ventas inmediatas con un retorno de inversión medible.</p>
+                    <div class="service-price">Desde $699/mes</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📧</div>
+                    <h3>Email Marketing</h3>
+                    <p>Automatización de campañas de correo que nutren leads, fidelizan clientes y aumentan tus conversiones con mensajes personalizados y oportunos.</p>
+                    <div class="service-price">Desde $599/mes</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Marketing de Contenidos</h3>
+                    <p>Creación de contenido de valor que atrae, educa y convierte a tu audiencia, estableciéndote como autoridad en tu industria.</p>
+                    <div class="service-price">Desde $749/mes</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Analítica & Reportes</h3>
+                    <p>Seguimiento detallado de métricas clave, análisis de datos y reportes mensuales que te muestran el impacto real de nuestras estrategias.</p>
+                    <div class="service-price">Incluido en todos los planes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process" id="proceso">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Nuestro Proceso de Trabajo</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Un enfoque estratégico y transparente que garantiza resultados excepcionales</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Análisis & Estrategia</h3>
+                    <p>Estudiamos tu negocio, audiencia y competencia para crear una estrategia personalizada.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Implementación</h3>
+                    <p>Ejecutamos las campañas con creatividad, tecnología y atención al detalle.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Optimización</h3>
+                    <p>Monitoreamos constantemente y ajustamos las estrategias para maximizar resultados.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Resultados</h3>
+                    <p>Entregamos reportes claros y medimos el impacto en tu crecimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results" id="resultados">
+        <div class="container">
+            <h2 class="section-title">Resultados que Hablan por Sí Solos</h2>
+            <p class="section-subtitle">Hemos ayudado a más de 250 empresas a alcanzar sus objetivos de marketing digital</p>
+            <div class="results-grid">
+                <div class="result-item">
+                    <span class="result-number" id="trafficIncrease">0</span>
+                    <span class="result-label">Aumento Promedio de Tráfico</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-number" id="leadIncrease">0</span>
+                    <span class="result-label">Más Leads Calificados</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-number" id="roiIncrease">0</span>
+                    <span class="result-label">Retorno de Inversión</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-number" id="clientsCount">0</span>
+                    <span class="result-label">Clientes Satisfechos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que Dicen Nuestros Clientes</h2>
+            <p class="section-subtitle">Empresas que han transformado su crecimiento con nuestras estrategias</p>
+            <div class="testimonials-container">
+                <div class="testimonials-wrapper" id="testimonialsWrapper">
+                    <div class="testimonial">
+                        <img src="https://placehold.co/80x80/6366f1/ffffff?text=MC" alt="María Contreras" class="testimonial-avatar">
+                        <h3>María Contreras</h3>
+                        <p class="position">CEO, ModaElegante</p>
+                        <div class="testimonial-stars">★★★★★</div>
+                        <blockquote>
+                            "En solo 3 meses, DigitalPro aumentó nuestro tráfico orgánico en un 210% y nuestras ventas en línea se triplicaron. El equipo es excepcionalmente profesional y siempre está disponible para responder nuestras preguntas."
+                        </blockquote>
+                    </div>
+                    <div class="testimonial">
+                        <img src="https://placehold.co/80x80/ec4899/ffffff?text=JP" alt="Juan Pérez" class="testimonial-avatar">
+                        <h3>Juan Pérez</h3>
+                        <p class="position">Director, TechSolutions</p>
+                        <div class="testimonial-stars">★★★★★</div>
+                        <blockquote>
+                            "Las campañas de Google Ads que implementó DigitalPro generaron un ROI del 350% en el primer trimestre. Su enfoque estratégico y análisis detallado de datos ha sido fundamental para nuestro crecimiento sostenible."
+                        </blockquote>
+                    </div>
+                    <div class="testimonial">
+                        <img src="https://placehold.co/80x80/10b981/ffffff?text=AL" alt="Ana López" class="testimonial-avatar">
+                        <h3>Ana López</h3>
+                        <p class="position">Marketing Manager, HealthPlus</p>
+                        <div class="testimonial-stars">★★★★★</div>
+                        <blockquote>
+                            "El contenido que DigitalPro crea para nuestras redes sociales ha aumentado nuestro engagement en un 180% y ha generado cientos de leads calificados. Su creatividad y comprensión de nuestra audiencia es impresionante."
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="testimonial-dots" id="testimonialDots">
+                    <div class="dot active" data-index="0"></div>
+                    <div class="dot" data-index="1"></div>
+                    <div class="dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="planes">
+        <div class="container">
+            <h2 class="section-title">Planes de Marketing Digital</h2>
+            <p class="section-subtitle">Soluciones flexibles adaptadas a las necesidades de tu negocio</p>
+            <div class="pricing-grid" id="pricingGrid">
+                <div class="pricing-card">
+                    <h3>Inicio</h3>
+                    <div class="pricing-price">$1,299<span>/mes</span></div>
+                    <ul class="pricing-features">
+                        <li><strong>Publicidad en 1 red social</strong></li>
+                        <li>2 campañas mensuales</li>
+                        <li>Creación de contenido básico</li>
+                        <li>Reporte mensual</li>
+                        <li>Soporte por email</li>
+                    </ul>
+                    <a href="#contacto" class="cta-button">Empezar Ahora</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Más Popular</div>
+                    <h3>Profesional</h3>
+                    <div class="pricing-price">$2,499<span>/mes</span></div>
+                    <ul class="pricing-features">
+                        <li><strong>Publicidad en 2 redes sociales</strong></li>
+                        <li><strong>Campañas de Google Ads</strong></li>
+                        <li>4 campañas mensuales</li>
+                        <li>Contenido premium</li>
+                        <li>Optimización SEO básica</li>
+                        <li>Reporte semanal</li>
+                        <li>Soporte prioritario</li>
+                    </ul>
+                    <a href="#contacto" class="cta-button">Empezar Ahora</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Empresarial</h3>
+                    <div class="pricing-price">$4,999<span>/mes</span></div>
+                    <ul class="pricing-features">
+                        <li><strong>Publicidad en 3+ redes sociales</strong></li>
+                        <li><strong>Campañas de Google Ads & SEO avanzado</strong></li>
+                        <li><strong>Marketing de contenidos completo</strong></li>
+                        <li>8+ campañas mensuales</li>
+                        <li>Automatización de email marketing</li>
+                        <li>Reportes en tiempo real</li>
+                        <li>Soporte 24/7</li>
+                        <li>Consultor asignado</li>
+                    </ul>
+                    <a href="#contacto" class="cta-button">Empezar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>¿Listo para Transformar tu Negocio?</h2>
+            <p>Agenda una consulta gratuita con nuestros expertos y descubre cómo podemos ayudarte a alcanzar tus objetivos de marketing digital.</p>
+            <div class="cta-buttons">
+                <a href="#contacto" class="cta-button">Agendar Consulta Gratuita</a>
+                <a href="tel:+15551234567" class="cta-button cta-white">Llamar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <p class="section-subtitle">Estamos aquí para ayudarte a alcanzar el éxito en el mundo digital</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>¿Tienes alguna pregunta?</h3>
+                    <p>Completa el formulario o contáctanos directamente. Nuestro equipo de expertos en marketing digital te responderá en menos de 24 horas.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>hola@digitalpro.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div>
+                                <h4>Horario</h4>
+                                <p>Lunes a Viernes: 9:00 - 18:00</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>Oficina</h4>
+                                <p>Av. Digital 456, Ciudad Innovación, CI 20202</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Servicio de Interés</label>
+                            <select id="service" name="service">
+                                <option value="">Selecciona un servicio</option>
+                                <option value="social">Publicidad en Redes Sociales</option>
+                                <option value="seo">SEO & Posicionamiento Web</option>
+                                <option value="google">Google Ads & PPC</option>
+                                <option value="email">Email Marketing</option>
+                                <option value="content">Marketing de Contenidos</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Presupuesto Estimado</label>
+                            <select id="budget" name="budget">
+                                <option value="">Selecciona una opción</option>
+                                <option value="500">Menos de $500/mes</option>
+                                <option value="1000">$500 - $1,000/mes</option>
+                                <option value="2000">$1,000 - $2,000/mes</option>
+                                <option value="3000">$2,000 - $3,000/mes</option>
+                                <option value="5000">Más de $3,000/mes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" placeholder="Cuéntanos sobre tu negocio y objetivos..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Digital<span style="color: var(--secondary);">Pro</span></h3>
+                    <p>Líderes en marketing digital con más de 8 años de experiencia ayudando a empresas a crecer en el mundo digital. Resultados medibles, transparencia total y compromiso absoluto.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">t</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul>
+                        <li><a href="#servicios">Publicidad en Redes</a></li>
+                        <li><a href="#servicios">SEO & Posicionamiento</a></li>
+                        <li><a href="#servicios">Google Ads</a></li>
+                        <li><a href="#servicios">Email Marketing</a></li>
+                        <li><a href="#servicios">Marketing de Contenidos</a></li>
+                        <li><a href="#servicios">Analítica Digital</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Empresa</h3>
+                    <ul>
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Nuestro Equipo</a></li>
+                        <li><a href="#">Casos de Éxito</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carreras</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#">Guías Gratuitas</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Calculadora de ROI</a></li>
+                        <li><a href="#">Checklist de Marketing</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DigitalPro. Todos los derechos reservados. Especialistas en marketing digital que generan resultados reales.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = (elements, animationClass = 'fadeInUp', delay = 0) => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = 1;
+                            entry.target.style.transform = 'translateY(0)';
+                        }, delay + index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'all 0.6s ease';
+                observer.observe(element);
+            });
+        };
+
+        // Animate service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        animateOnScroll(serviceCards, 'fadeInUp', 200);
+
+        // Animate process steps
+        const processSteps = document.querySelectorAll('.process-step');
+        animateOnScroll(processSteps, 'fadeInUp', 300);
+
+        // Animate result items
+        const resultItems = document.querySelectorAll('.result-item');
+        animateOnScroll(resultItems, 'fadeInUp', 400);
+
+        // Animate pricing cards
+        const pricingCards = document.querySelectorAll('.pricing-card');
+        animateOnScroll(pricingCards, 'fadeInUp', 500);
+
+        // Stats counter animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current).toLocaleString() + (target === 350 ? '%' : '');
+            }, 16);
+        }
+
+        // Animate stats when they come into view
+        const resultsSection = document.querySelector('.results');
+        const trafficIncrease = document.getElementById('trafficIncrease');
+        const leadIncrease = document.getElementById('leadIncrease');
+        const roiIncrease = document.getElementById('roiIncrease');
+        const clientsCount = document.getElementById('clientsCount');
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounter(trafficIncrease, 210);
+                animateCounter(leadIncrease, 300);
+                animateCounter(roiIncrease, 350);
+                animateCounter(clientsCount, 250);
+                statsObserver.unobserve(resultsSection);
+            }
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(resultsSection);
+
+        // Testimonials slider
+        const testimonialsWrapper = document.getElementById('testimonialsWrapper');
+        const dots = document.querySelectorAll('.dot');
+        let currentTestimonial = 0;
+        const totalTestimonials = dots.length;
+
+        function showTestimonial(index) {
+            testimonialsWrapper.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+            currentTestimonial = index;
+        }
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                showTestimonial(index);
+            });
+        });
+
+        // Auto-rotate testimonials
+        let testimonialInterval = setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            showTestimonial(currentTestimonial);
+        }, 6000);
+
+        // Pause auto-rotate on hover
+        const testimonialsContainer = document.querySelector('.testimonials-container');
+        testimonialsContainer.addEventListener('mouseenter', () => {
+            clearInterval(testimonialInterval);
+        });
+
+        testimonialsContainer.addEventListener('mouseleave', () => {
+            testimonialInterval = setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+                showTestimonial(currentTestimonial);
+            }, 6000);
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('service').value;
+            
+            // Simple validation
+            if (!name || !email) {
+                alert('Por favor, completa los campos obligatorios.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitButton = contactForm.querySelector('.submit-button');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                submitButton.textContent = '¡Mensaje Enviado!';
+                alert(`Gracias ${name}! Tu mensaje ha sido enviado correctamente. Un experto en ${service ? service : 'marketing digital'} se pondrá en contacto contigo en menos de 24 horas.`);
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Reset button
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 80 + 20;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.1 + 0.05;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.opacity = opacity;
+                particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                // Animation
+                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                // Add to container
+                particlesContainer.appendChild(particle);
+                
+                // Fade in
+                setTimeout(() => {
+                    particle.style.opacity = opacity;
+                }, delay * 1000);
+            }
+        }
+        
+        // Initialize particles when page loads
+        window.addEventListener('load', createParticles);
+
+        // Add interactive hover effect to service cards
+        serviceCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = -(x - centerX) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // Add typing effect to hero title
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        setTimeout(() => {
+            let i = 0;
+            const typingInterval = setInterval(() => {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                }
+            }, 40);
+        }, 300);
+
+        // Add parallax effect to hero image
+        window.addEventListener('mousemove', (e) => {
+            const heroImage = document.querySelector('.hero-image img');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+            
+            heroImage.style.transform = `translateX(${xAxis}px) translateY(${yAxis}px) scale(1.03)`;
+        });
+
+        // Reset transform on mouse leave
+        document.querySelector('.hero').addEventListener('mouseleave', () => {
+            const heroImage = document.querySelector('.hero-image img');
+            heroImage.style.transform = 'translateX(0) translateY(0) scale(1)';
+        });
+
+        // Highlight active navigation link based on scroll position
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
